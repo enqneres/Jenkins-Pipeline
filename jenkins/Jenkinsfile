@@ -1,0 +1,24 @@
+pipeline {
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'GIT', url: 'https://github.com/thiago-jv/SPRINGBOOT_JENKINS.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('jenkins') {
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+            dir('jenkins') {
+                    sh 'docker compose up -d'
+                }
+            }
+        }
+
+    }
+}

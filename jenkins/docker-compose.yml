@@ -1,0 +1,13 @@
+  services:
+    backend:
+      container_name: backend
+      restart: always
+      build: .
+      ports:
+        - "8084:8084"
+      networks:
+        - network-rede-local
+
+  networks:
+    network-rede-local:
+      driver: bridge
