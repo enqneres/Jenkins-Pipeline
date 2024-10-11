@@ -1,7 +1,11 @@
 pipeline {
     agent any
+    environment {
+            MVN_HOME = '/usr/share/maven'
+        }
     stages {
         stage('Checkout') {
+            def mvnHome
             steps {
                 git branch: 'main', credentialsId: 'GIT', url: 'https://github.com/thiago-jv/SPRINGBOOT_JENKINS.git'
             }
@@ -9,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('jenkins') {
-                    sh '/usr/share/maven/bin/mvn clean package'
+                    sh 'mvn clean package'
                 }
             }
         }
