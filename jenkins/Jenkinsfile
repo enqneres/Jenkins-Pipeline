@@ -1,7 +1,7 @@
 pipeline {
     agent any
-    environment {
-            MVN_HOME = '/usr/share/maven'
+    tools {
+            maven 'Maven 3.6.3' // This should match the name in Global Tool Configuration
     }
     stages {
         stage('Checkout') {
