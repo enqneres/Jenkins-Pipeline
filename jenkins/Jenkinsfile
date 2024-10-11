@@ -5,7 +5,6 @@ pipeline {
         }
     stages {
         stage('Checkout') {
-            def mvnHome
             steps {
                 git branch: 'main', credentialsId: 'GIT', url: 'https://github.com/thiago-jv/SPRINGBOOT_JENKINS.git'
             }
