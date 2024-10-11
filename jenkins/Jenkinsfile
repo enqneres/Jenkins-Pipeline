@@ -1,11 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', credentialsId: 'GIT', url: 'https://github.com/thiago-jv/SPRINGBOOT_JENKINS.git'
-            }
-        }
         stage('Build') {
             steps {
                 dir('jenkins') {
@@ -16,7 +11,7 @@ pipeline {
         stage('Deploy') {
             steps {
             dir('jenkins') {
-                    sh 'docker compose up'
+                    sh 'docker compose up -d'
                 }
             }
         }
