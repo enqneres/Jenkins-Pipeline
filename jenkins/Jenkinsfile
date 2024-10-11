@@ -16,7 +16,7 @@ pipeline {
         stage('Deploy') {
             steps {
             dir('jenkins') {
-                    sh 'docker compose up -d'
+                    sh 'docker compose up'
                 }
             }
         }
