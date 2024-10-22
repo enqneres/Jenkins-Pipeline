@@ -47,7 +47,6 @@ pipeline {
        stage('Deploy') {
            steps {
                sh 'echo "Executando deploy"'
-               sh 'docker container run --rm -p 8084:8084 --network rede-local docjv/jenkins_api:${env.BUILD_ID}'
            }
        }
    }
