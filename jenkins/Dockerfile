@@ -4,6 +4,7 @@ COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 FROM openjdk:17
-COPY --from=build /home/app/target/app.jar /usr/local/lib/app.jar
+WORKDIR /usr/local/app
+COPY --from=build /home/app/target/app.jar app.jar
 EXPOSE 8084
 ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar"]
