@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         SONAR_QUBE_URL = 'http://localhost:9000'
-        SONAR_QUBE_TOKEN = 'a301b02dbba1361309fa705159fb41f742d03413'
+        SONAR_QUBE_TOKEN = '9e8bd1f57eeb533c498fbb2ef0eff2122681edb7'
     }
     stages {
         stage('Build') {
@@ -27,13 +27,13 @@ pipeline {
                 }
             }
         }
-    stage('Deploy') {
-            steps {
-            dir('jenkins') {
-                    sh 'docker compose up -d'
-                }
-            }
-        }
+//     stage('Deploy') {
+//             steps {
+//             dir('jenkins') {
+//                     sh 'docker compose up -d'
+//                 }
+//             }
+//         }
 
     }
 }
