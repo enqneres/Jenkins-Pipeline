@@ -8,18 +8,18 @@ pipeline {
         stage('Build') {
             steps {
                 dir('jenkins') {
-                      sh 'mvn clean package'
+                    sh 'mvn clean package'
                 }
             }
         }
-    stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') {
                     sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=BackEnd -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
                 }
             }
         }
-    stage('Quality Gate') {
+        stage('Quality Gate') {
             steps {
                 sleep(10)
                 timeout(time: 1, unit: 'MINUTES') {
@@ -27,30 +27,27 @@ pipeline {
                 }
             }
         }
-    stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                 dockerapp = docker.build("docjv/jenkins_api:${env.BUILD_ID}", '-f jenkins/Dockerfile jenkins/')
+                    dockerapp = docker.build("docjv/jenkins_api:${env.BUILD_ID}", '-f jenkins/Dockerfile jenkins/')
                 }
-        }
-    }
-
-    stage('Push Docker Image') {
-            steps {
-                script {
-                 docker.withRegistry('https://registry.hub.docker.com', 'dockerhub' ){
-                 dockerapp.push('latest')
-                 dockerapp.push("${env.BUILD_ID}")
-                 }
             }
         }
-    }
-
-    stage('Deploy') {
+        stage('Push Docker Image') {
             steps {
-              sh 'echo "Excutando depoy"'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        dockerapp.push('latest')
+                        dockerapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
         }
-    }
-
-
+        stage('Deploy') {
+            steps {
+                sh 'echo "Executando deploy"'
+            }
+        }
+    } // Adicione esta chave para fechar 'stages'
 }
