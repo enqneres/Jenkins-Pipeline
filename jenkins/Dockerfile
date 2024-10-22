@@ -7,4 +7,4 @@ FROM openjdk:17
 WORKDIR /usr/local/app
 COPY --from=build /home/app/target/app.jar app.jar
 EXPOSE 8084
-ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
