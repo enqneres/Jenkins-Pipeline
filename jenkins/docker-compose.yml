@@ -1,13 +1,12 @@
   services:
-    backend:
-      container_name: backend
-      restart: always
-      build: .
+    jenkis-api:
+      image: jenkis-api
       ports:
         - "8084:8084"
       networks:
-        - network-rede-local
+        - rede-local
 
   networks:
-    network-rede-local:
+    rede-local:
       driver: bridge
+      name: rede-local

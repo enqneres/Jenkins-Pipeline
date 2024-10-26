@@ -12,7 +12,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - network-rede-local
+      - rede-local
 
   sonarqube:
     container_name: sonar
@@ -20,7 +20,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - network-rede-local
+      - rede-local
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
@@ -41,5 +41,6 @@ volumes:
   pgdata:
 
 networks:
-  network-rede-local:
+  rede-local:
     driver: bridge
+    name: rede-local

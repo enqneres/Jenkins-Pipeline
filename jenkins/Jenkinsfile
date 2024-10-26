@@ -2,24 +2,24 @@ pipeline {
     agent any
     environment {
         SONAR_QUBE_URL = 'http://localhost:9000'
-        SONAR_QUBE_TOKEN = 'a301b02dbba1361309fa705159fb41f742d03413'
+        SONAR_QUBE_TOKEN = '9e8bd1f57eeb533c498fbb2ef0eff2122681edb7'
     }
     stages {
         stage('Build') {
             steps {
                 dir('jenkins') {
-                      sh 'mvn clean package'
+                    sh 'mvn clean package'
                 }
             }
         }
-    stage('SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') {
                     sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=BackEnd -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
                 }
             }
         }
-    stage('Quality Gate') {
+        stage('Quality Gate') {
             steps {
                 sleep(10)
                 timeout(time: 1, unit: 'MINUTES') {
@@ -27,13 +27,27 @@ pipeline {
                 }
             }
         }
-    stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-            dir('jenkins') {
-                    sh 'docker compose up -d'
+                script {
+                    dockerapp = docker.build("docjv/jenkins_api:${env.BUILD_ID}", '-f jenkins/Dockerfile jenkins/')
                 }
             }
         }
-
-    }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                        dockerapp.push('latest')
+                        dockerapp.push("${env.BUILD_ID}")
+                    }
+                }
+            }
+        }
+       stage('Deploy') {
+           steps {
+               sh 'echo "Executando deploy"'
+           }
+       }
+   }
 }
