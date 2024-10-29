@@ -12,21 +12,21 @@ pipeline {
                 }
             }
         }
-//         stage('SonarQube Analysis') {
-//             steps {
-//                 withSonarQubeEnv('SONAR_LOCAL') {
-//                     sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=BackEnd -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
-//                 }
-//             }
-//         }
-//         stage('Quality Gate') {
-//             steps {
-//                 sleep(10)
-//                 timeout(time: 1, unit: 'MINUTES') {
-//                     waitForQualityGate abortPipeline: true
-//                 }
-//             }
-//         }
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SONAR_LOCAL') {
+                    sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=BackEnd -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                sleep(10)
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
