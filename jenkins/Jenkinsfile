@@ -15,7 +15,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') {
-                    sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=BackEnd -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
+                    sh "${tool 'SONAR_SCANER'}/bin/sonar-scanner -Dsonar.projectKey=Backend -Dsonar.host.url=${env.SONAR_QUBE_URL} -Dsonar.login=${env.SONAR_QUBE_TOKEN} -Dsonar.java.binaries=./"
                 }
             }
         }
