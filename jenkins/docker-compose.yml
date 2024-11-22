@@ -1,6 +1,6 @@
   services:
-    jenkis-api:
-      image: jenkis-api
+    jenkins-api:
+      image: enoqueneres94/jenkins-api:v1
       ports:
         - "8084:8084"
       networks:
