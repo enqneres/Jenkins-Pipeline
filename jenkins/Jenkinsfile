@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         SONAR_QUBE_URL = 'http://localhost:9000'
-        SONAR_QUBE_TOKEN = '9e8bd1f57eeb533c498fbb2ef0eff2122681edb7'
+        SONAR_QUBE_TOKEN = 'a89290d663c883a6d0b566c6c65f9fd8125fc6bf'
     }
     stages {
         stage('Build') {
