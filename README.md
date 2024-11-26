@@ -2,29 +2,18 @@ Estou entusiasmado em compartilhar que completei uma jornada incrível de aprend
 
 🖥️ Tecnologias Utilizadas:
 
-Ubuntu
-
-Jenkins
-
-SonarQube
-
-GitHub
-
-Spring
-
-Docker
-
-Java
-
-PostgreSQL
-
-DBeaver
-
-Maven
-
-Kubernetes
-
-K3d
+- Ubuntu
+- Jenkins
+- SonarQube
+- GitHub
+- Spring
+- Docker
+- Java
+- PostgreSQL
+- DBeaver
+- Maven
+- Kubernetes
+- K3d
 
 Durante esse processo, aprofundei meus conhecimentos em:
 
