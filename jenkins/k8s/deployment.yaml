@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: jenkins-api
-          image: enoqueneres94/jenkins-api:{TAG}
+          image: enoqueneres94/jenkins-api:${TAG}
           ports:
             - name: http
               containerPort: 8084
