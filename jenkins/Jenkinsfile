@@ -30,7 +30,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerapp = docker.build("enoqueneres94/jenkins-api:v1", '-f jenkins/Dockerfile jenkins/')
+                    dockerapp = docker.build("enoqueneres94/jenkins-api:${env.BUILD_ID}", '-f jenkins/Dockerfile jenkins/')
                 }
             }
         }
