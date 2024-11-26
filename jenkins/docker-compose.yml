@@ -1,6 +1,6 @@
   services:
     jenkins-api:
-      image: enoqueneres94/jenkins-api:v1
+      image: enoqueneres94/jenkins-api:latest
       ports:
         - "8084:8084"
       networks:

@@ -44,7 +44,7 @@ pipeline {
                 }
             }
         }
-        stage('Deploy k8s') {
+        stage('Deploy no Kubernetes') {
             environment {
                 tag_version = "${env.BUILD_ID}"
             }
